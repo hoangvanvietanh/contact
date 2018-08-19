@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+#relative {
+	width: 50%;
+	height: 50%;
+	background-color: white;
+	float: right;
+	margin: 6px;
+	text-align: center;
+	text-align: justify;
+}
+
+.box {
+	position: absolute;
+	width: 400px;
+	height: 500px;
+	background-image: url("../images/iphone.png");;
+	top: 50px;
+	right: 40%;
+}
+
+.setting {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	top: 399px;
+	right: 269px;
+	left: 153px;
+}
+
+.contacts {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	top: 399px;
+	right: 269px;
+	left: 204px;
+}
+
+.call {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	top: 399px;
+	right: 269px;
+	left: 101px;
+}
+
+.messages {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	top: 399px;
+	right: 269px;
+	left: 256px;
+}
