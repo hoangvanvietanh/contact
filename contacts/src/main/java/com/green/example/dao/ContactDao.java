@@ -17,8 +17,6 @@ import org.hibernate.query.Query;
 import com.green.example.entity.Contact;
 
 public class ContactDao {
-	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    Session session = sessionFactory.openSession();
     Part file;
     
     
@@ -51,6 +49,8 @@ public class ContactDao {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Contact> getList()
 	{
+    	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
 		Query hql = session.createQuery("from Contact");
 		List<Contact> list = hql.list();
 		return list;

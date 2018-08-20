@@ -40,8 +40,8 @@ public class PhoneServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		System.out.println(action);
-		System.out.println("hello");
+		//System.out.println(action);
+		//System.out.println("hello");
 		if(action.equals("contacts"))
 		{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/home.jsp");

@@ -49,12 +49,11 @@ public class ContactServlet extends HttpServlet {
 		String sex = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
 		String note = request.getParameter("note");
 		if(mode.equals("insert"))
 		{
 			pm.uploadFile(uploadRootPath);
-			Contact us = new Contact(name,photo, birthday, sex, address, phone, email, note);
+			Contact us = new Contact(name,photo, birthday, sex, address, phone, note);
 			ContactDetailModel user = new ContactDetailModel(us);
 			int kq = user.insertUser();
 			if(kq==0)

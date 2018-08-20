@@ -2,9 +2,11 @@ package com.green.example.test;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
@@ -17,18 +19,24 @@ public class test {
 public static void main(String[] args) {
 		
 		//update();
-
-		select();
+		//select();
 		//insert();
+		//delete();
 	}
 	
+	@SuppressWarnings("unused")
 	private static void select() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			
+			String EmailContact = session.get(EmailContact.class, 1).getContact().getName();
+			System.out.println(EmailContact);
+			
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		EmailContact emailContact = session.get(EmailContact.class, "s");
-		System.out.println(emailContact.getContact().getName());
-		
-		session.close();
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void select1() {
@@ -58,7 +66,7 @@ public static void main(String[] args) {
 		email.setEmail("xyz@gmail.com");
 
 		// get contact form DB
-		String name ="asd";
+		String name ="Meo";
 		Contact contact = session.get(Contact.class, name);
 		
 		email.setContact(contact);
@@ -69,28 +77,47 @@ public static void main(String[] args) {
 		session.close();
 	}
 
-	@SuppressWarnings("unused")
 	private static void insert() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		// insert EmailContact
 		EmailContact email = new EmailContact();
 		email.setEmail("abc@gmail.com");
 
-		// get contact form DB hoac tao moi
+		
 		Contact contact = new Contact();
-		contact.setName("s");
-		contact.setAddress("HCM");
+		contact.setName("anhemta");
+		contact.setPhoto("asd");
+		contact.setBirthday("1998-10-10");
 		contact.setSex("male");
-		contact.setAddress("11");
-		email.setContact(contact);
+		contact.setAddress("HCM");
+		contact.setPhoneNumber("123");
+		contact.setNote("not");
+		
+		
 
 		Transaction tran = session.beginTransaction();
-
+		email.setContact(contact);
+		
+		//session.save(contact);
 		session.save(email);
-
 		tran.commit();
 		session.close();
 	}
-
+	@SuppressWarnings("unused")
+	private static void delete()
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		EmailContact email = new EmailContact();
+		
+		String name ="Meo";
+		Contact contact = session.get(Contact.class, name);
+		//session.delete(contact);
+		
+		EmailContact emails = new EmailContact();
+		emails.getClass().getName().equals(contact);
+		session.delete(emails);
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+	}
 
 }

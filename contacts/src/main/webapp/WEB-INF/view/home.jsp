@@ -1,9 +1,7 @@
 <%@page import="com.green.example.dao.ContactDao"%>
-<%@page import="com.green.example.model.ContactDetailModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +44,9 @@
 				
 			</div>
 		<%
-			ContactDao user = new ContactDao();
+			ContactDao contact = new ContactDao();
 		%>
-		<c:forEach var='u' items="<%= user.getList() %>">
+		<c:forEach var='u' items="<%= contact.getList() %>">
 			<div class="row list">
 				<div class="cimage"><img src="resources/images/${u.photo}" height="30px" width="30px"></div>
 				<div class="cname">${u.name}</div>

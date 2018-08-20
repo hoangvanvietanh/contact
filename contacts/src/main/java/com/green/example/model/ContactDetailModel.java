@@ -70,7 +70,7 @@ public class ContactDetailModel {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				Contact temp = new Contact(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8));
+				Contact temp = new Contact(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7));
 				list.add(temp);
 			}
 			ps.close();
@@ -97,7 +97,6 @@ public class ContactDetailModel {
 			ps.setString(4, Contact.getSex());
 			ps.setString(5, Contact.getAddress());
 			ps.setString(6, Contact.getPhoneNumber());
-			ps.setString(7, Contact.getEmail());
 			ps.setString(8, Contact.getNote());
 			kq = ps.executeUpdate();
 		} catch (SQLException e) {
