@@ -12,9 +12,13 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
+import com.green.example.entity.ContactDetail;
+import com.green.example.entity.EmailContact;
+import com.green.example.entity.PhoneContact;
 
 public class ContactDao {
     Part file;
@@ -45,9 +49,8 @@ public class ContactDao {
 	 
 	     return filename;
 	}
-    
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<Contact> getList()
+	public List<Contact> findAll()
 	{
     	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -55,7 +58,17 @@ public class ContactDao {
 		List<Contact> list = hql.list();
 		return list;
 	}
-	    
+    public List<Contact> findByName(String name)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "select * from contact where name = :name";
+		NativeQuery query =session.createSQLQuery(sql);
+		query.addEntity(Contact.class);
+		query.setParameter("name",name);
+		List<Contact> results = query.list();
+		return results;
+	}
+   
     public void uploadFile(String uploadRootPath)
 	{                          
 		try

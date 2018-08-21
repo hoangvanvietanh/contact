@@ -1,8 +1,12 @@
 package com.green.example.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -20,24 +24,22 @@ public class Contact {
 	private String sex;
 	@Column(name="address")
 	private String address;
-	@Column(name="phone")
-	private String phoneNumber;
 	@Column(name="note")
 	private String note;
-	
-	
+	@OneToMany(mappedBy="contact", cascade = CascadeType.ALL)
+	private Set<EmailContact> emailContact;
+	@OneToMany(mappedBy="contact", cascade = CascadeType.ALL)
+	private Set<PhoneContact> phoneContact;
 	
 	public Contact() {
 
 	}
-	public Contact(String name, String photo, String birthday, String sex, String address, String phoneNumber,
-			 String note) {
+	public Contact(String name, String photo, String birthday, String sex, String address,String note) {
 		this.name = name;
 		this.photo = photo;
 		this.birthday = birthday;
 		this.sex = sex;
 		this.address = address;
-		this.phoneNumber = phoneNumber;
 		this.note = note;
 	}
 	public String getName() {
@@ -70,17 +72,23 @@ public class Contact {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
 	public String getNote() {
 		return note;
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public Set<EmailContact> getEmailContact() {
+		return emailContact;
+	}
+	public void setEmailContact(Set<EmailContact> emailContact) {
+		this.emailContact = emailContact;
+	}
+	public Set<PhoneContact> getPhoneContact() {
+		return phoneContact;
+	}
+	public void setPhoneContact(Set<PhoneContact> phoneContact) {
+		this.phoneContact = phoneContact;
 	}
 	
 	

@@ -53,7 +53,7 @@ public class ContactServlet extends HttpServlet {
 		if(mode.equals("insert"))
 		{
 			pm.uploadFile(uploadRootPath);
-			Contact us = new Contact(name,photo, birthday, sex, address, phone, note);
+			Contact us = new Contact(name,photo, birthday, sex, address, note);
 			ContactDetailModel user = new ContactDetailModel(us);
 			int kq = user.insertUser();
 			if(kq==0)

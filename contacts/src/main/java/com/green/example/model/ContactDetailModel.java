@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.persistence.Column;
 import javax.servlet.http.Part;
 
 
+import com.green.example.controller.ContactDetailController;
 import com.green.example.controller.MyConnect;
 import com.green.example.entity.Contact;
 
@@ -21,6 +23,14 @@ import java.sql.ResultSet;
 
 
 public class ContactDetailModel {
+	
+	private boolean errContactNotFound = false;
+	private String name;
+	private String photo;
+	private String birthday;
+	private String sex;
+	private String address;
+	private String note;
 	Contact Contact;
 	Part file;
 	
@@ -70,7 +80,7 @@ public class ContactDetailModel {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				Contact temp = new Contact(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7));
+				Contact temp = new Contact(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6));
 				list.add(temp);
 			}
 			ps.close();
@@ -96,7 +106,6 @@ public class ContactDetailModel {
 			ps.setString(3, Contact.getBirthday());
 			ps.setString(4, Contact.getSex());
 			ps.setString(5, Contact.getAddress());
-			ps.setString(6, Contact.getPhoneNumber());
 			ps.setString(8, Contact.getNote());
 			kq = ps.executeUpdate();
 		} catch (SQLException e) {

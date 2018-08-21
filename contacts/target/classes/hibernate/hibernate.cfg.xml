@@ -7,7 +7,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/contacts</property>
         <property name="hibernate.connection.username">hoangvanvietanh</property>
-        <property name="hibernate.connection.password">VietAnh123</property>
+        <property name="hibernate.connection.password">Vietanh123</property>
         <property name="hibernate.connection.pool_size">10</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
@@ -15,5 +15,6 @@
 
         <mapping class="com.green.example.entity.Contact" />
         <mapping class="com.green.example.entity.EmailContact" />
+        <mapping class="com.green.example.entity.PhoneContact" />
     </session-factory>
 </hibernate-configuration>

@@ -19,7 +19,7 @@
 					src="resources/images/contact.png" />
 			</form>
 
-			<form action="phoneServlet?action=call" method="Post">
+			<form action="home">
 				<input class="call" type="image" id="call" alt="call"
 					src="resources/images/call.png" />
 			</form>
