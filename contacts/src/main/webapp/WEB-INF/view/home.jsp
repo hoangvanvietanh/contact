@@ -23,12 +23,12 @@
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="phoneServlet?action=contacts" method="Post">
+			<form action="home" method="Post">
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
 
-			<form action="HomeController">
+			<form action="call">
 				<input class="call" type="image" id="call" alt="call"
 					src="resources/images/call.png" />
 			</form>
@@ -86,7 +86,10 @@
 				</div>
 				<div class="cnote"><%=contact.getNote()%></div>
 				<div>
-					<input type="button" value="BT1">
+					<form action="<%=Utils.getUrl(request, "/ContactDetailController") %>" method="get">
+					<input type="hidden" name="contactName" value="<%=contact.getName() %>"/>
+					<button type="submit" >Edit</button>
+				</form>
 				</div>
 				<div>
 					<input type="button" value="BT2">

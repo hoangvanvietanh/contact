@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +22,7 @@ import com.green.example.entity.Contact;
 import com.green.example.entity.ContactDetail;
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
+
 
 public class ContactDao {
     Part file;
@@ -69,6 +73,29 @@ public class ContactDao {
 		return results;
 	}
    
+    
+    public Contact find(String name) throws SQLException{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "select * from contact where name = :name";
+		NativeQuery query =session.createSQLQuery(sql);
+		
+		query.addEntity(Contact.class);
+		query.setParameter("name",name);
+		List Contact = query.list();
+		ResultSet rs = (ResultSet) query.list();
+		Contact contact = extractContact(rs);
+		return contact;
+	}
+    private Contact extractContact(ResultSet rs) throws SQLException {
+		Contact item = new Contact();
+		item.setName(rs.getString("full_name"));
+		item.setAddress(rs.getString("address"));
+		item.setPhoto(rs.getString("avatar"));
+		item.setBirthday(rs.getString("birth_date"));
+		item.setSex(rs.getString("sex"));
+		item.setNote(rs.getString("note"));
+		return item;
+	}
     public void uploadFile(String uploadRootPath)
 	{                          
 		try

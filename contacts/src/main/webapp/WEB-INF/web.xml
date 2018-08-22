@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>com.green.example.controller.ContactDetailController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>callController</servlet-name>
+  	<display-name>callController</display-name>
+  	<description></description>
+  	<servlet-class>com.green.example.controller.callController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>ContactDetailController</servlet-name>
   	<url-pattern>/ContactDetailController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>callController</servlet-name>
+  	<url-pattern>/callController</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,6 +1,10 @@
 package com.green.example.test;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -47,8 +51,50 @@ public class test {
 		{
 			System.out.println(email.getName() +email.getEmail() + email.getPhone());;
 		}*/
+		/*PreparedStatement statement = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "select * from contact where name = :name";
+		NativeQuery query =session.createSQLQuery(sql);
+		
+		query.addEntity(Contact.class);
+		query.setParameter("name","vietanh");
+		//List Contact = query.list();
+		ResultSet rs = statement.executeQuery(sql);
+		Contact contact = extractContact(rs);*/
+		System.out.println("Hello");
+		Contact contact = null;
+		Connection dbConnection = null;
+		PreparedStatement statement = null;
+		String query = "SELECT * FROM contact WHERE name = ?";
+
+		try {
+			statement = dbConnection.prepareStatement(query);
+			statement.setString(1, "vietanh");
+
+			// execute select SQL stetement
+			ResultSet rs = statement.executeQuery();
+
+			if (rs.next()) {
+				contact = extractContact(rs);
+			}
+
+		} catch (SQLException e) {
+			
+		}
+		
+
 	}
 
+	private static Contact extractContact(ResultSet rs) throws SQLException {
+		Contact item = new Contact();
+		item.setName(rs.getString("full_name"));
+		item.setAddress(rs.getString("address"));
+		item.setPhoto(rs.getString("avatar"));
+		item.setBirthday(rs.getString("birth_date"));
+		item.setSex(rs.getString("sex"));
+		item.setNote(rs.getString("note"));
+		return item;
+	}
 	@SuppressWarnings("unused")
 	private static void select(String email) {
 		try {

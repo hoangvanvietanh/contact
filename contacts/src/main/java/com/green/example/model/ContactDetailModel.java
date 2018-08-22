@@ -90,6 +90,15 @@ public class ContactDetailModel {
 		}
 		return list;
 	}
+	
+	public void setContact(Contact contact) {
+		this.photo = contact.getPhoto();
+		this.sex = contact.getSex();
+		this.name = contact.getName();
+		this.birthday = contact.getBirthday();
+		this.address = contact.getAddress();
+		this.note = contact.getNote();
+	}
 	public int insertUser()
 	{
 		int kq=0;
@@ -135,4 +144,61 @@ public class ContactDetailModel {
 		}
 		System.out.println("Thanh cong");
 		}
+	
+		
+		public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public boolean isErrContactNotFound() {
+		return errContactNotFound;
+	}
+
+		public void setErrContactNotFound(boolean errContactNotFound) {
+		this.errContactNotFound = errContactNotFound;
+	}
 	}

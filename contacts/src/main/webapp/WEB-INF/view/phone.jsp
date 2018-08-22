@@ -14,12 +14,12 @@
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="phoneServlet?action=contacts" method="Post">
+			<form action="home">
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
 
-			<form action="home">
+			<form action="call">
 				<input class="call" type="image" id="call" alt="call"
 					src="resources/images/call.png" />
 			</form>
