@@ -48,7 +48,6 @@ public class ContactServlet extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String sex = request.getParameter("gender");
 		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
 		String note = request.getParameter("note");
 		if(mode.equals("insert"))
 		{

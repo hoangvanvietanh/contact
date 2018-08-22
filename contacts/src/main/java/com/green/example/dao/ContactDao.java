@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,9 +18,7 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
-import com.green.example.entity.ContactDetail;
-import com.green.example.entity.EmailContact;
-import com.green.example.entity.PhoneContact;
+
 
 
 public class ContactDao {
@@ -66,9 +63,11 @@ public class ContactDao {
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "select * from contact where name = :name";
+		@SuppressWarnings("rawtypes")
 		NativeQuery query =session.createSQLQuery(sql);
 		query.addEntity(Contact.class);
 		query.setParameter("name",name);
+		@SuppressWarnings("unchecked")
 		List<Contact> results = query.list();
 		return results;
 	}
@@ -77,10 +76,12 @@ public class ContactDao {
     public Contact find(String name) throws SQLException{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "select * from contact where name = :name";
+		@SuppressWarnings("rawtypes")
 		NativeQuery query =session.createSQLQuery(sql);
 		
 		query.addEntity(Contact.class);
 		query.setParameter("name",name);
+		@SuppressWarnings({ "rawtypes", "unused" })
 		List Contact = query.list();
 		ResultSet rs = (ResultSet) query.list();
 		Contact contact = extractContact(rs);

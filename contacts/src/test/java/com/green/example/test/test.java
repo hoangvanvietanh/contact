@@ -1,8 +1,7 @@
 package com.green.example.test;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,15 +9,14 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
+
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
-import com.green.example.entity.ContactDetail;
+
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Object;
-import com.green.example.dao.EmailContactDao;
+
 import com.green.example.dao.HibernateUtil;
 
 public class test {
@@ -61,7 +59,7 @@ public class test {
 		//List Contact = query.list();
 		ResultSet rs = statement.executeQuery(sql);
 		Contact contact = extractContact(rs);*/
-		System.out.println("Hello");
+		/*System.out.println("Hello");
 		Contact contact = null;
 		Connection dbConnection = null;
 		PreparedStatement statement = null;
@@ -80,11 +78,12 @@ public class test {
 
 		} catch (SQLException e) {
 			
-		}
+		}*/
 		
 
 	}
 
+	@SuppressWarnings("unused")
 	private static Contact extractContact(ResultSet rs) throws SQLException {
 		Contact item = new Contact();
 		item.setName(rs.getString("full_name"));
@@ -118,7 +117,7 @@ public class test {
 
 		session.close();
 
-		for (EmailContact ad : admins) {
+		for (@SuppressWarnings("unused") EmailContact ad : admins) {
 			
 		}
 
@@ -185,7 +184,7 @@ public class test {
 	
 
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unused" })
 	private static void deleteEmailByContactName(String name) {
 		String emails = null;
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -255,6 +254,7 @@ public class test {
 		tran.commit();
 		session.close();
 	}
+	@SuppressWarnings("unused")
 	private static void deleteContact() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Serializable name = new String("datdbu");
