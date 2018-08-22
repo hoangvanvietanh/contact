@@ -9,7 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
@@ -79,8 +79,18 @@ public class test {
 		} catch (SQLException e) {
 			
 		}*/
-		
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
+		String sql = "select c from PhoneContact c where c.contact.name = :name";
+
+		Query query =session.createQuery(sql);
+		
+		query.setParameter("name","vietanh");
+		List<PhoneContact> phone = query.list();
+		for(PhoneContact con: phone)
+		{
+			System.out.println(con.getPhone()+con.getContact().getName());
+		}
 	}
 
 	@SuppressWarnings("unused")
@@ -215,12 +225,12 @@ public class test {
 	private static void insertContact() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		EmailContact email = new EmailContact();
-		email.setEmail("datssssbu@gmail.com");
+		email.setEmail("vietanh@gmail.com");
 		PhoneContact phone = new PhoneContact();
-		phone.setPhone("12345500s0");
+		phone.setPhone("987654");
 		
 		Contact contact = new Contact();
-		contact.setName("vandat");
+		contact.setName("vietanh");
 		contact.setPhoto("asds");
 		contact.setBirthday("1998-10-10");
 		contact.setSex("male");

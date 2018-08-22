@@ -2,6 +2,7 @@ package com.green.example.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.green.example.entity.Contact;
+import com.green.example.entity.EmailContact;
+import com.green.example.entity.PhoneContact;
 import com.green.example.model.ContactDetailModel;
 import com.green.example.service.ContactService;
 
@@ -35,31 +38,27 @@ public class ContactDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
 		ContactDetailModel model = new ContactDetailModel();
-
-		String contactName = "vietem";//req.getParameter("nameContact");
+		String name = req.getParameter("contactName");
 		// update mode
-		//if (contactName != null) {
-				try {
-					Contact contact = contactService.findContact("vietanh");
+		if (name != null) {
+		
+					Contact contact = contactService.findContact(name);
+					List<EmailContact> email = contactService.findEmail(name);
+					List<PhoneContact> phone = contactService.findPhone(name);
+					model.setEmail(email);
+					model.setPhone(phone);
 					if (contact != null) {
 						model.setContact(contact);
 					} else {
 
 						// Error contact not found
 						model.setErrContactNotFound(true);
-						model.setName(contactName);
+						model.setName(name);
 					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			
-
 			// create mode
-		//} else {
-			//model.setContact(new Contact());
-		//}
+		} else {
+			model.setContact(new Contact());
+		}
 
 		// view
 		req.setAttribute("model", model);

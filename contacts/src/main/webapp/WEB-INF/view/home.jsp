@@ -37,11 +37,12 @@
 				src="resources/images/messages.png" />
 		</div>
 	</div>
+	
+	<div id="main">
 	<div class="actionnn">
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
 	</div>
-	<div id="main">
 		<div class="row" id="list-header">
 			<div class="cimage">Image</div>
 			<div class="cname">Name</div>

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,13 +17,16 @@ import javax.servlet.http.Part;
 
 import com.green.example.controller.MyConnect;
 import com.green.example.entity.Contact;
+import com.green.example.entity.EmailContact;
+import com.green.example.entity.PhoneContact;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
 public class ContactDetailModel {
-	
+	private List<EmailContact> email = new ArrayList<>();
+	private List<PhoneContact> phone = new ArrayList<>();
 	private boolean errContactNotFound = false;
 	private String name;
 	private String photo;
@@ -148,7 +152,14 @@ public class ContactDetailModel {
 		public String getName() {
 		return name;
 	}
-
+	public String getFemale()
+	{
+		return "checked";
+	}
+	public String getMale()
+	{
+		return "checked";
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -200,4 +211,28 @@ public class ContactDetailModel {
 		public void setErrContactNotFound(boolean errContactNotFound) {
 		this.errContactNotFound = errContactNotFound;
 	}
+		
+		public List<EmailContact> getEmail() {
+			return email;
+		}
+		
+		public void setEmail(List<EmailContact> email) {
+			this.email = email;
+		}
+		
+		public boolean isEmailEmpty() {
+			return email == null || email.size() == 0;
+		}
+		
+		public List<PhoneContact> getPhone() {
+			return phone;
+		}
+		
+		public void setPhone(List<PhoneContact> phone) {
+			this.phone = phone;
+		}
+		
+		public boolean isPhoneEmpty() {
+			return phone == null || phone.size() == 0;
+		}
 	}

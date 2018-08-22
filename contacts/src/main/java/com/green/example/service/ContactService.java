@@ -42,7 +42,13 @@ public class ContactService {
 
 		return phoneContactDao.findByName(name);
 	}
-	public Contact findContact(String name) throws SQLException {
+	public Contact findContact(String name) {
 		return contactDao.find(name);
+	}
+	public List<PhoneContact> findPhone(String name) {
+		return contactDao.findPhone(name);
+	}
+	public List<EmailContact> findEmail(String name) {
+		return contactDao.findEmail(name);
 	}
 }

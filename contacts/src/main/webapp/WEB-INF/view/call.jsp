@@ -23,7 +23,7 @@
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="home" method="Post">
+			<form action="home">
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
@@ -37,11 +37,12 @@
 				src="resources/images/messages.png" />
 		</div>
 	</div>
-	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
-	</div>
+	
 	<div id="main">
+		<div class="actionnn">
+			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
+			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
+		</div>
 		<div class="row" id="list-header">
 			<div class="cimage">Image</div>
 			<div class="cname">Name</div>

@@ -1,5 +1,7 @@
 <%@page import="utils.Utils"%>
 <%@page import="com.green.example.model.ContactDetailModel"%>
+<%@page import="com.green.example.entity.EmailContact"%>
+<%@page import="com.green.example.entity.PhoneContact"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -33,7 +35,7 @@ td.c {
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="home" method="Post">
+			<form action="home" >
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
@@ -66,39 +68,51 @@ td.c {
 				</tr>
 				<tr>
 					<td>Birthday</td>
-					<td class="c"><input type="date" name="birthday" value="<%=model.getBirthday() %>
+					<td class="c"><input type="date" name="birthday" value="<%=model.getBirthday() %>"
 						placeholder="Input your birthday"></td>
 				</tr>
 				<tr>
 					<td>Sex</td>
-					<td class="c"><input type="radio" name="gender" value="male">
-						Male <input type="radio" name="gender" value="female">
-						Female</td>
+					<td class="c"><input type="radio" name="gender" value="male" >Male
+								  <input type="radio" name="gender" value="female" >Female
+					</td>
 				</tr>
 				<tr>
 					<td>Address</td>
-					<td class="c"><input type="text" name="address" <%=model.getAddress() %>
+					<td class="c"><input type="text" name="address" value="<%=model.getAddress() %>"
 						placeholder="Input your address"></td>
 				</tr>
 				<tr>
 					<td>Phone</td>
-					<td class="c"><input type="text" name="phone"
-						placeholder="Input your phone number"></td>
+					<% 
+					for(PhoneContact phone: model.getPhone()){
+						if(phone.getContact().getName().equals(model.getName())){	
+				%>
+					<td class="c"><input type="text" name="phone" value= "<%= phone.getPhone()%>"
+				
+						placeholder="Input your phone number"></td><%}} %>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td class="c"><input type="text" name="email"
-						placeholder="Input your email"></td>
+					<% 
+					for(EmailContact email: model.getEmail()){
+						if(email.getContact().getName().equals(model.getName())){
+					%>
+					<td class="c"><input type="text" name="email"value= "<%= email.getEmail()%>"  
+					placeholder="Input your email"></td><%}} %>
 				</tr>
 				<tr>
 					<td>Note</td>
-					<td class="c"><input type="text" name="note" <%=model.getNote() %>></td>
+					<td class="c"><input type="text" name="note" value=" <%=model.getNote() %>"></td>
+				</tr>
+				<tr>
+					<td><button type="submit">Submit</button></td>
+					<td><button type="button"
+					onclick="window.location.href='<%=Utils.getUrl(request, "/home")%>'">Cancel</button></td>
 				</tr>
 			</table>
 			<div class="action">
-				<button type="submit">Submit</button>
-				<button type="button"
-					onclick="window.location.href='<%=Utils.getUrl(request, "/home")%>'">Cancel</button>
+				
 			</div>
 		</form>
 	</div>
