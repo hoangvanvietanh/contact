@@ -1,5 +1,7 @@
 <%@page import="utils.Utils"%>
 <%@page import="com.green.example.model.ContactDetailModel"%>
+<%@page import="com.green.example.entity.EmailContact"%>
+<%@page import="com.green.example.entity.PhoneContact"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -33,7 +35,7 @@ td.c {
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="home" method="Post">
+			<form action="home" >
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
@@ -47,92 +49,80 @@ td.c {
 				src="resources/images/messages.png" />
 		</div>
 	</div>
-	<% if (model.isErrContactNotFound()) { %>
-		<p class="error">Contact not found!</p>
-	<%} else { %>
+	
 	<div id="main">
-		<div id="testdiv">
-		<form enctype="multipart/form-data" action="userServlet?action=insert"
-			method="Post">
-			<table>
+	<div class="actionnn">
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
+	</div>
+		<div class="row" id="list-header">
+			<div class="cimage">Image</div>
+			<div class="cname">Name</div>
+			<div class="cbirthday">Birthday</div>
+			<div class="cgender">Gender</div>
+			<div class="caddress">Address</div>
+			<div class="cphone">Phone</div>
+			<div class="cemail">Email</div>
+			<div class="cnote">Notes</div>
+		</div>
+		
+			<% if (model.isErrContactNotFound()) { %>
+				<p class="error">Contact not found!</p>
+			<%} else { %>
+			<div class="row list">
+				<div class="cimage">
+					<img src="resources/images/<td><%=model.getPhoto()%></td>" height="30px" width="30px">
+				</div>
+				<div class="cname"><%=model.getName()%></div>
+				<%}%>
+				<div style="border:none" class="cbirthday"><input type="date" name="birthday" value="<%=model.getBirthday()%>"></div>
+				<div class="cgender"><%=model.getSex()%></div>
+				<div style="border:none" class="caddress"><input type="text" name="address" value="<%=model.getAddress() %>"></div>
+				<% 
+					for(PhoneContact phone: model.getPhone()){
+						if(phone.getContact().getName().equals(model.getName())){	
+				%>
+				<div class="cphone"> 
+					<input type="text" name="phone" value= "<%= phone.getPhone()%>"><%}}%></div>
+				<% 
+					for(EmailContact email: model.getEmail()){
+						if(email.getContact().getName().equals(model.getName())){
+					%>
+				<div class="cemail"> 
+					<input type="text" name="email"value= "<%= email.getEmail()%>"><%}} %></div>
+				<div class="cnote"><input type="text" name="note" value=" <%=model.getNote()%>"></div>
+				</div>
+			</div>
+			
+			
+			<% if (model.isErrContactNotFound()) { %>
+				<p class="error">Contact not found!</p>
+			<%} else { %>
+			<table class="tbl-border">
 				<tr>
-					<td>Name</td>
-					<td class="c"><%=model.getName() %></td>
-				</tr>
+					<td>Full Name</td>
+					<td><input name="name" value="<%=model.getName() %>" /></td>
+				<tr>
 				<% } %>
+				
 				<tr>
-					<td>Photo</td>
-					<td class="c"><input type="file" name="file"></td>
-				</tr>
+					<td>Gender</td>
+					<td>
+						<%=model.getSex()%>
+					</td>
 				<tr>
-					<td>Birthday</td>
-					<td class="c"><input type="date" name="birthday" value="<%=model.getBirthday() %>
-						placeholder="Input your birthday"></td>
-				</tr>
 				<tr>
-					<td>Sex</td>
-					<td class="c"><input type="radio" name="gender" value="male">
-						Male <input type="radio" name="gender" value="female">
-						Female</td>
+					<td>Birth Date</td>
+					<td><input type="date" name="birthday" value="<%=model.getBirthday()%>"></td>
 				</tr>
 				<tr>
 					<td>Address</td>
-					<td class="c"><input type="text" name="address" <%=model.getAddress() %>
-						placeholder="Input your address"></td>
-				</tr>
+					<td><input type="text" name="address" value="<%=model.getAddress() %>"></td>
 				<tr>
-					<td>Phone</td>
-					<td class="c"><input type="text" name="phone"
-						placeholder="Input your phone number"></td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td class="c"><input type="text" name="email"
-						placeholder="Input your email"></td>
-				</tr>
 				<tr>
 					<td>Note</td>
-					<td class="c"><input type="text" name="note" <%=model.getNote() %>></td>
-				</tr>
+					<td><input type="text" name="note" value=" <%=model.getNote()%>"></td>
+				<tr>
 			</table>
-			<div class="action">
-				<button type="submit">Submit</button>
-				<button type="button"
-					onclick="window.location.href='<%=Utils.getUrl(request, "/home")%>'">Cancel</button>
-			</div>
-		</form>
-	</div>
-	</div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#test").validate({
-				rules:
-				{
-					name: "required",
-					sdt: "required",
-					email: "required",
-				},
-				messages:
-				{
-					name: "Check your last name,please!!!",
-					sdt: "Check your phone number,please!!!",
-					email: "Check your email,please!!!"
-				}
-			});
-			$("#test").submit(function(){
-				if($("#test").validate().form())
-				{
-					aldert("Form ok");
-					return true;
-				}
-				else
-				{
-					aldert("Something wrong");
-					return false;
-				}
-			});
-			
-		});
-	</script>
 </body>
 </html>

@@ -12,6 +12,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="resources/css/home.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>VietAnh</title>
 </head>
 <%
@@ -23,7 +24,7 @@
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="home" method="Post">
+			<form action="home">
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
@@ -37,11 +38,12 @@
 				src="resources/images/messages.png" />
 		</div>
 	</div>
-	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
-	</div>
+	
 	<div id="main">
+		<div class="actionnn">
+			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
+			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
+		</div>
 		<div class="row" id="list-header">
 			<div class="cimage">Image</div>
 			<div class="cname">Name</div>
@@ -66,7 +68,12 @@
 				%>
 					<%= phone.getPhone()%>
 				<%}} %>
-					<input type="button" value="Call">
+					<div>
+						<form action="<%=Utils.getUrl(request, "/CallingController") %>" method="get">
+							<input type="hidden" name="contactName" value="<%=contact.getName() %>"/>
+							<button type="submit" >Call</button>
+						</form>
+					</div>
 				</div>
 			</div>
 			<%
@@ -77,6 +84,7 @@
 			Empty!
 		</div>
 		<% } %>
+		
 	</div>
 </body>
 </html>

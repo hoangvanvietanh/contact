@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>com.green.example.controller.callController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CallingController</servlet-name>
+  	<display-name>CallingController</display-name>
+  	<description></description>
+  	<servlet-class>com.green.example.controller.CallingController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>ContactDetailController</servlet-name>
   	<url-pattern>/ContactDetailController</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>callController</servlet-name>
   	<url-pattern>/callController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CallingController</servlet-name>
+  	<url-pattern>/CallingController</url-pattern>
   </servlet-mapping>
 </web-app>

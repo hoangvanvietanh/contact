@@ -1,0 +1,44 @@
+@charset "UTF-8";
+#relative {
+	width: 50%;
+	height: 50%;
+	background-color: white;
+	float: right;
+	margin: 6px;
+	text-align: center;
+	text-align: justify;
+}
+
+.box {
+    position: absolute;
+    width: 308px;
+    height: 550px;
+    background-image: url(../images/iphoneCalling.png);
+    top: 25px;
+    right: 40%;
+}
+#callEnd {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    top: 420px;
+    right: 269px;
+    left: 124px;
+}
+.timer {
+    position: absolute;
+    top: 115px;
+    right: 268px;
+    left: 125px;
+    color: white;
+}
+div.c {
+    font-size: 175%;
+    color: white;
+}
+.vtName {
+    position: absolute;
+    top: 78px;
+    right: 265px;
+    left: 115px;
+}

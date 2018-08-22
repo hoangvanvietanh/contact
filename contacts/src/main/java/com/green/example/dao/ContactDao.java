@@ -18,6 +18,8 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
+import com.green.example.entity.EmailContact;
+import com.green.example.entity.PhoneContact;
 
 
 
@@ -73,28 +75,57 @@ public class ContactDao {
 	}
    
     
-    public Contact find(String name) throws SQLException{
+    public Contact find(String name) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		String sql = "select * from contact where name = :name";
-		@SuppressWarnings("rawtypes")
-		NativeQuery query =session.createSQLQuery(sql);
+		//tim thuoc tinh binh thuong
+//		String sql = "select c from contact c where c.name = :name";
+//
+//		Query query =session.createQuery(sql);
+//		
+//		query.setParameter("name",name);
+//		List<Contact> contact = query.list();
 		
-		query.addEntity(Contact.class);
-		query.setParameter("name",name);
-		@SuppressWarnings({ "rawtypes", "unused" })
-		List Contact = query.list();
-		ResultSet rs = (ResultSet) query.list();
-		Contact contact = extractContact(rs);
+		//session.get(Contact.class, name);
+		Contact contact = session.get(Contact.class, name);
 		return contact;
+		
 	}
-    private Contact extractContact(ResultSet rs) throws SQLException {
+    public List<PhoneContact> findPhone(String name) {
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+
+		String sql = "select c from PhoneContact c where c.contact.name = :name";
+
+		Query query =session.createQuery(sql);
+		
+		query.setParameter("name",name);
+		List<PhoneContact> phone = query.list();
+	
+		return phone;
+		
+	}
+    public List<EmailContact> findEmail(String name) {
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+
+		String sql = "select c from EmailContact c where c.contact.name = :name";
+
+		Query query =session.createQuery(sql);
+
+		query.setParameter("name",name);
+		List<EmailContact> email = query.list();
+	
+		return email;
+		
+	}
+    
+    
+    private Contact extractContact(Contact results) {
 		Contact item = new Contact();
-		item.setName(rs.getString("full_name"));
-		item.setAddress(rs.getString("address"));
-		item.setPhoto(rs.getString("avatar"));
-		item.setBirthday(rs.getString("birth_date"));
-		item.setSex(rs.getString("sex"));
-		item.setNote(rs.getString("note"));
+		item.setName(results.getName());
+		item.setAddress(results.getAddress());
+		item.setPhoto(results.getPhoto());
+		item.setBirthday(results.getBirthday());
+		item.setSex(results.getSex());
+		item.setNote(results.getNote());
 		return item;
 	}
     public void uploadFile(String uploadRootPath)

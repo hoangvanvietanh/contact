@@ -10,7 +10,6 @@
 	width: 1060px;
 	height: 2000px;
 	float: right;
-	
 }
 
 .box {
@@ -18,7 +17,6 @@
 	width: 321px;
 	height: 500px;
 	background-image: url("../images/iphone.png");
-	
 	right: 81%;
 }
 
@@ -57,74 +55,105 @@
 	right: 269px;
 	left: 256px;
 }
+
 #list-header {
-    height: 18px;
-    background-color: powderblue;
-    color: white;
-    top: 10px;
-    
+	height: 18px;
+	background-color: powderblue;
+	color: white;
+	top: 10px;
 }
+
 .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
 }
+
 .list {
-    background-color: white;
-    border-bottom: 1px solid lightgray;
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    padding: 1rem;
+	background-color: white;
+	border-bottom: 1px solid lightgray;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	padding: 1rem;
 }
+
 .cimage {
-    width: 50px;
+	width: 50px;
 	height: 25px;
-	text-align: left;
+	text-align: center;
 }
+
 .cname {
-    width: 145px;
+	width: 145px;
 	height: 25px;
-	text-align: left;
+	text-align: center;
 }
+
 .cbirthday {
-    width: 100px;
+	width: 100px;
 	height: 25px;
-	text-align: left;
+	text-align: center;
 }
+
 .cgender {
-    width: 55px;
+	width: 55px;
 	height: 25px;
 	text-align: left;
 }
+
 .caddress {
-    width: 162px;
+	width: 162px;
 	height: 25px;
 	text-align: left;
 }
+
 .cphone {
-    width: 100px;
+	width: 100px;
 	height: 25px;
 	text-align: left;
 }
+
 .cemail {
-    width: 209px;
+	width: 209px;
 	height: 25px;
 	text-align: left;
 }
+
 .cnote {
-    width: 100px;
+	width: 100px;
 	height: 25px;
 	text-align: left;
 }
+
 .action {
-    width: 20px;
+	width: 20px;
 	height: 25px;
 	text-align: left;
 }
+
 .actionnn {
 	padding: 5px 0px;
+}
+
+table.tbl-border {
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tbl-border th, td {
+	border: 1px solid black;
+}
+
+table.tbl-border th, td {
+	margin: 0;
+	padding: 5px;
+	text-align: left;
+	padding: 5px;
+}
+input:focus {
+    outline:none;
 }

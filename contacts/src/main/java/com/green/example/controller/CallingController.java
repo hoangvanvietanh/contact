@@ -1,7 +1,6 @@
 package com.green.example.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,25 +17,28 @@ import com.green.example.model.ContactDetailModel;
 import com.green.example.service.ContactService;
 
 /**
- * Servlet implementation class ContactDetailController
+ * Servlet implementation class CallingController
  */
-@WebServlet(name = "ContactDetailController", urlPatterns = "/contact-detail")
-public class ContactDetailController extends HttpServlet {
+@WebServlet(
+		  name = "CallingController", 
+		  urlPatterns = "/calling")
+public class CallingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
 	private ContactService contactService;
 
-	public ContactDetailController() {
-		contactService = new ContactService();
-	}
+    public CallingController() {
+    	contactService = new ContactService();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @throws IOException 
-	 * @throws ServletException 
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ContactDetailModel model = new ContactDetailModel();
 		String name = req.getParameter("contactName");
 		// update mode
@@ -62,16 +64,14 @@ public class ContactDetailController extends HttpServlet {
 
 		// view
 		req.setAttribute("model", model);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/contact-detail.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/calling.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
