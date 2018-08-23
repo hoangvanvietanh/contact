@@ -16,5 +16,6 @@
         <mapping class="com.green.example.entity.Contact" />
         <mapping class="com.green.example.entity.EmailContact" />
         <mapping class="com.green.example.entity.PhoneContact" />
+        <mapping class="com.green.example.entity.PhoneHistory" />
     </session-factory>
 </hibernate-configuration>

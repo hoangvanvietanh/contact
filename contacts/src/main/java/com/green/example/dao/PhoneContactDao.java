@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import com.green.example.entity.Contact;
 import com.green.example.entity.PhoneContact;
 
 public class PhoneContactDao {
@@ -21,7 +23,24 @@ public class PhoneContactDao {
 			List<PhoneContact> list = hql.list();
 			return list;
 		}
-	 
+	 public void createNoNamePhone(String phone)
+	 {
+		 	Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction tran = session.beginTransaction();
+
+			// insert EmailContact
+			PhoneContact phoneContact = new PhoneContact();
+			phoneContact.setPhone(phone);
+
+			// get contact form DB
+			Contact contact = session.get(Contact.class, "No_Name");
+			phoneContact.setContact(contact);
+			
+			session.save(phoneContact);
+
+			tran.commit();
+			session.close();
+	 }
 	 public List<PhoneContact> findByName(String name)
 		{
 			Session session = HibernateUtil.getSessionFactory().openSession();
@@ -35,7 +54,12 @@ public class PhoneContactDao {
 			return results;
 			
 		}
-
+	 public PhoneContact findByPhone(String phone)
+	 {
+		 Session session = HibernateUtil.getSessionFactory().openSession();
+		 PhoneContact phoneContact = session.get(PhoneContact.class, phone);
+		 return phoneContact;
+	 }
 	public PhoneContact create(PhoneContact contact) {
 		return contact;
 	}

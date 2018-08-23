@@ -26,17 +26,13 @@ td.c {
 </style>
 </head>
 <body>
-	<%
-		ContactDetailModel model = (ContactDetailModel) request.getAttribute("model");
-	%>
-	
 	<div id="contrainer">
 		<div class="box">
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
 			<form action="home" >
-				<input class="contacts" type="image" id="contacts" alt="contacts"
+				<input  class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
 
@@ -55,24 +51,19 @@ td.c {
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
 	</div>		
-			<% if (model.isErrContactNotFound()) { %>
-				<p class="error">Contact not found!</p>
-			<%} else { %>
-			<form enctype="multipart/form-data" action="ContactServlet?action=insert"
-			method="Post">
+			<form enctype="multipart/form-data" action="contact?action=insert" method="post">
 			<table class="tbl-border">
 				<tr>
 					<td>Name</td>
-					<td class="c" colspan="5"><%=model.getName() %></td>
+					<td class="c" colspan="5"><input type="text" name="name" ></td>
 				</tr>
-				<% } %>
 				<tr>
 					<td>Photo</td>
 					<td class="c" colspan="5"><input type="file" name="file"></td>
 				</tr>
 				<tr>
 					<td>Birthday</td>
-					<td class="c" colspan="5"><input type="date" name="birthday" value="<%=model.getBirthday() %>"
+					<td class="c" colspan="5"><input type="date" name="birthday" 
 						placeholder="Input your birthday"></td>
 				</tr>
 				<tr>
@@ -83,31 +74,24 @@ td.c {
 				</tr>
 				<tr>
 					<td>Address</td>
-					<td class="c" colspan="5"><input type="text" name="address" value="<%=model.getAddress() %>"
+					<td class="c" colspan="5"><input type="text" name="address" 
 						placeholder="Input your address"></td>
 				</tr>
 				<tr>
 					<td>Phone</td>
-					<% 
-					for(PhoneContact phone: model.getPhone()){
-						if(phone.getContact().getName().equals(model.getName())){	
-				%>
-					<td class="c" colspan="5"><input type="text" name="phone" value= "<%= phone.getPhone()%>"
+					<td class="c" colspan="5"><input type="text" name="phone" 
 				
-						placeholder="Input your phone number"><%}} %>
+						placeholder="Input your phone number">
 				</tr>
 				<tr>
 					<td>Email</td>
-					<% 
-					for(EmailContact email: model.getEmail()){
-						if(email.getContact().getName().equals(model.getName())){
-					%>
-					<td class="c"><input type="text" name="email"value= "<%= email.getEmail()%>"  
-					placeholder="Input your email"></td><%}} %>
+					
+					<td class="c"><input type="text" name="email" 
+					placeholder="Input your email"></td>
 				</tr>
 				<tr>
 					<td>Note</td>
-					<td class="c" colspan="5"><input type="text" name="note" value=" <%=model.getNote() %>"></td>
+					<td class="c" colspan="5"><input type="text" name="note" ></td>
 				</tr>
 				<tr>
 					<td>Action</td>

@@ -23,7 +23,7 @@
 			<input class="setting" type="image" id="setting" alt="setting"
 				src="resources/images/Settings.png" />
 
-			<form action="home" method="Post">
+			<form action="home">
 				<input class="contacts" type="image" id="contacts" alt="contacts"
 					src="resources/images/contact.png" />
 			</form>
@@ -40,8 +40,8 @@
 	
 	<div id="main">
 	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
 	</div>
 		<div class="row" id="list-header">
 			<div class="cimage">Image</div>
@@ -60,10 +60,11 @@
 		<%
 				if (!model.isEmpty()) {
 				for (Contact contact : model.getContacts()) {
+					if(contact.getName().equals("No_Name")==false){
 		%>
 			<div class="row list">
 				<div class="cimage">
-					<img src="resources/images/<td><%=contact.getPhoto()%></td>" height="30px" width="30px">
+					<img src="resources/images/<%=contact.getPhoto()%>" height="30px" width="30px">
 				</div>
 				<div class="cname"><%=contact.getName()%></div>
 				<div class="cbirthday"><%=contact.getBirthday()%></div>
@@ -74,7 +75,7 @@
 					for(PhoneContact phone: model.getPhone()){
 						if(phone.getContact().getName().equals(contact.getName())){	
 				%>
-					<%= phone.getPhone()%>
+					<%= phone.getPhone()%><br>
 				<%}} %>
 				</div>
 				<div class="cemail"> 
@@ -92,12 +93,9 @@
 					<button type="submit" >Edit</button>
 				</form>
 				</div>
-				<div>
-					<input type="button" value="BT2">
-				</div>
 			</div>
 			<%
-				}
+				}}
 			} else {
 		%>
 		<div>

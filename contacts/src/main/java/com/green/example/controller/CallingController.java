@@ -40,29 +40,16 @@ public class CallingController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ContactDetailModel model = new ContactDetailModel();
-		String name = req.getParameter("contactName");
-		// update mode
-		if (name != null) {
-		
-					Contact contact = contactService.findContact(name);
-					List<EmailContact> email = contactService.findEmail(name);
-					List<PhoneContact> phone = contactService.findPhone(name);
-					model.setEmail(email);
-					model.setPhone(phone);
-					if (contact != null) {
-						model.setContact(contact);
+		String phone = req.getParameter("phoneContact");
+					if (phone != null) {
+					PhoneContact phoneContact = contactService.findPhoneByPhone(phone);
+					model.setPhoneContact(phoneContact);;
+				
 					} else {
 
 						// Error contact not found
 						model.setErrContactNotFound(true);
-						model.setName(name);
 					}
-			// create mode
-		} else {
-			model.setContact(new Contact());
-		}
-
-		// view
 		req.setAttribute("model", model);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/calling.jsp");
 		dispatcher.forward(req, resp);
@@ -71,9 +58,21 @@ public class CallingController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ContactDetailModel model = new ContactDetailModel();
+		
+		String phoneNumber = req.getParameter("phoneNumber");
+		contactService.createNoNamePhone(phoneNumber);
+		
+		if (phoneNumber != null) {
+			PhoneContact phoneContact = contactService.findPhoneByPhone(phoneNumber);
+			model.setPhoneContact(phoneContact);
+			} else {
+				model.setErrContactNotFound(true);
+			}
+		req.setAttribute("model", model);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/calling.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 }

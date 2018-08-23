@@ -1,10 +1,15 @@
 package com.green.example.test;
 
 import java.io.Serializable;
-
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,13 +21,61 @@ import com.green.example.entity.Contact;
 
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
-
+import com.green.example.entity.PhoneHistory;
 import com.green.example.dao.HibernateUtil;
 
-public class test {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+
+
+public class test {
+ 
 	public static void main(String[] args) {
 
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		 PhoneContact phoneContact = session.get(PhoneContact.class, "1234500s0");
+		 ;
+		 System.out.println(phoneContact.getContact().getName());
+		
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
+		String pho ="123654";
+		PhoneContact phoneContact = new PhoneContact();
+		phoneContact.setPhone(pho);
+
+		String name ="No Name";
+		Contact contact = session.get(Contact.class, name);
+
+		phoneContact.setContact(contact);
+		Transaction tran = session.beginTransaction();
+	
+		session.save(phoneContact);
+
+		tran.commit();
+		session.close();*/
+		
+		
+		
+		
+		
+		
+		
+		//
+    	/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String time = dtf.format(now);
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        PhoneHistory phoneHis = new PhoneHistory();
+        phoneHis.setDate(time);
+        
+        PhoneContact phone = session.get(PhoneContact.class, "12345500s0");
+        phoneHis.setPhone(phone);
+        
+        Transaction tran = session.beginTransaction();
+        session.save(phoneHis);
+		tran.commit();
+		session.close();*/
 		// update();
 		 //selectAllEmail();
 		//insertContact();
@@ -79,7 +132,7 @@ public class test {
 		} catch (SQLException e) {
 			
 		}*/
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 
 		String sql = "select c from PhoneContact c where c.contact.name = :name";
 
@@ -90,7 +143,15 @@ public class test {
 		for(PhoneContact con: phone)
 		{
 			System.out.println(con.getPhone()+con.getContact().getName());
-		}
+		}*/
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//Calendar cal = Calendar.getInstance();
+		//System.out.println(dateFormat.format(cal)); //2016/11/16 12:08:43
+		/*System.out.println(System.currentTimeMillis());
+		//stmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+		java.util.Date utilDate = new Date(0, 0, 0);
+		java.sql.Date date = new java.sql.Date(utilDate.getTime());
+		System.out.println(date.getTime());*/
 	}
 
 	@SuppressWarnings("unused")
@@ -222,20 +283,20 @@ public class test {
 	}
 
 	@SuppressWarnings("unused")
-	private static void insertContact() {
+	private static void insertContact(String name, String photo, String birthday, String sex, String emails, String phones, String address, String note) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		EmailContact email = new EmailContact();
-		email.setEmail("vietanh@gmail.com");
+		email.setEmail(emails);
 		PhoneContact phone = new PhoneContact();
-		phone.setPhone("987654");
+		phone.setPhone(phones);
 		
 		Contact contact = new Contact();
-		contact.setName("vietanh");
-		contact.setPhoto("asds");
-		contact.setBirthday("1998-10-10");
-		contact.setSex("male");
-		contact.setAddress("HCM");
-		contact.setNote("not");
+		contact.setName(name);
+		contact.setPhoto(photo);
+		contact.setBirthday(birthday);
+		contact.setSex(sex);
+		contact.setAddress(address);
+		contact.setNote(note);
 		
 		Transaction tran = session.beginTransaction();
 		email.setContact(contact);

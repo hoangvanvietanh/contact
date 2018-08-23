@@ -22,6 +22,18 @@
   	<description></description>
   	<servlet-class>com.green.example.controller.CallingController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>PhoneHistoryController</servlet-name>
+  	<display-name>PhoneHistoryController</display-name>
+  	<description></description>
+  	<servlet-class>com.green.example.controller.PhoneHistoryController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AddContactController</servlet-name>
+  	<display-name>AddContactController</display-name>
+  	<description></description>
+  	<servlet-class>com.green.example.controller.AddContactController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>ContactDetailController</servlet-name>
   	<url-pattern>/ContactDetailController</url-pattern>
@@ -33,5 +45,13 @@
   <servlet-mapping>
   	<servlet-name>CallingController</servlet-name>
   	<url-pattern>/CallingController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PhoneHistoryController</servlet-name>
+  	<url-pattern>/PhoneHistoryController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddContactController</servlet-name>
+  	<url-pattern>/AddContactController</url-pattern>
   </servlet-mapping>
 </web-app>

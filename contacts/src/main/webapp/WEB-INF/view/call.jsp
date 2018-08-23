@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/home.css">
+<link rel="stylesheet" type="text/css" href="resources/css/call.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>VietAnh</title>
@@ -38,11 +38,14 @@
 				src="resources/images/messages.png" />
 		</div>
 	</div>
-	
+
 	<div id="main">
 		<div class="actionnn">
-			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/ContactDetailController") %>'" >Add</button>
-			<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/call-history") %>'" >Call History</button>
+			<button type="button"
+				onclick="window.location.href='<%=Utils.getUrl(request, "/contact")%>'">Add</button>
+			<button type="button"
+				onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController")%>'">Call
+				History</button>
 		</div>
 		<div class="row" id="list-header">
 			<div class="cimage">Image</div>
@@ -51,40 +54,56 @@
 			<div class="action">Ac1</div>
 
 		</div>
-		
+
 		<%
-				if (!model.isEmpty()) {
+			if (!model.isEmpty()) {
 				for (Contact contact : model.getContacts()) {
+					if (contact.getName().equals("No_Name") == false) {
 		%>
-			<div class="row list">
-				<div class="cimage">
-					<img src="resources/images/<td><%=contact.getPhoto()%></td>" height="30px" width="30px">
-				</div>
-				<div class="cname"><%=contact.getName()%></div>
-				<div class="cphone"> 
-				<% 
-					for(PhoneContact phone: model.getPhone()){
-						if(phone.getContact().getName().equals(contact.getName())){	
-				%>
-					<%= phone.getPhone()%>
-				<%}} %>
-					<div>
-						<form action="<%=Utils.getUrl(request, "/CallingController") %>" method="get">
-							<input type="hidden" name="contactName" value="<%=contact.getName() %>"/>
-							<button type="submit" >Call</button>
-						</form>
-					</div>
-				</div>
+		<div class="row list">
+			<div class="cimage">
+				<img src="resources/images/<td><%=contact.getPhoto()%></td>"
+					height="30px" width="30px">
 			</div>
-			<%
+			<div class="cname"><%=contact.getName()%></div>
+			<div class="cphone">
+				<%
+					for (PhoneContact phone : model.getPhone()) {
+									if (phone.getContact().getName().equals(contact.getName())) {
+				%>
+				<%=phone.getPhone()%><br>
+				
+			</div>
+			<div class="action">
+				<form action="<%=Utils.getUrl(request, "/CallingController")%>"
+					method="get">
+					<input type="hidden" name="phoneContact"
+						value="<%=phone.getPhone()%>" />
+					<button type="submit">Call</button>
+				</form>
+				<%
+					}
+								}
+				%>
+			</div>
+		</div>
+		<%
+			}
 				}
 			} else {
 		%>
-		<div>
-			Empty!
+		<div>Empty!</div>
+		<%
+			}
+		%>
+		<div >
+			<form action="<%=Utils.getUrl(request, "/CallingController")%>"
+				method="post">
+				<input type="text" name="phoneNumber">
+				<button type="submit">Call</button>
+			</form>
 		</div>
-		<% } %>
-		
 	</div>
+
 </body>
 </html>

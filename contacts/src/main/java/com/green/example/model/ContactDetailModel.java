@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 public class ContactDetailModel {
 	private List<EmailContact> email = new ArrayList<>();
 	private List<PhoneContact> phone = new ArrayList<>();
+	private PhoneContact phoneContact = new PhoneContact();
 	private boolean errContactNotFound = false;
 	private String name;
 	private String photo;
@@ -37,6 +38,15 @@ public class ContactDetailModel {
 	Contact Contact;
 	Part file;
 	
+	
+	public PhoneContact getPhoneContact() {
+		return phoneContact;
+	}
+
+	public void setPhoneContact(PhoneContact phoneContact) {
+		this.phoneContact = phoneContact;
+	}
+
 	public ContactDetailModel(Part file) {
 		System.out.println("vo usermodel");
 		this.file = file;

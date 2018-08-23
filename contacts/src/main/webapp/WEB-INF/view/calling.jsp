@@ -21,20 +21,19 @@
 	<%} else { %>
 	<div class="relative">
 		<div class="box" id="chronoExample">
-			<div class="vtName">
-				<div class="c"><%=model.getName() %></div><%} %>
+		<div class="vtName">
+				<div class="c"><%=model.getPhoneContact().getContact().getName() %></div>
 			</div>
-			
 			<div class="timer" >
               <div class="values">00:00:00</div>
               <div>
                 <button style="display: none" class="resetButton startButton" id="myButton"></button>
               </div>
             </div>
-			<form action="call">
+			<form action="call?phoneHis=<%= model.getPhoneContact().getPhone()%>" method="post">
 				<input class="stopButton" type="image" id="callEnd" alt="callEnd"
 					src="resources/images/callEnd2.png" />
-			</form>
+			</form><%} %>
 		</div>
 	</div>
 	<script>

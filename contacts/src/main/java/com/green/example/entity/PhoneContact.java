@@ -1,11 +1,14 @@
 package com.green.example.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +21,7 @@ public class PhoneContact {
 	@ManyToOne
 	@JoinColumn(name="phone_contact_name")
 	private Contact contact;
-
+	
 	public String getPhone() {
 		return phone;
 	}
@@ -34,6 +37,7 @@ public class PhoneContact {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
+
 	
 	
 	

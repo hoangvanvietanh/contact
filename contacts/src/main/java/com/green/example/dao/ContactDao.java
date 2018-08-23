@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
@@ -90,6 +91,18 @@ public class ContactDao {
 		return contact;
 		
 	}
+    public List<Contact> findContactByPhone(String phone)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "select c from contact where  contact.phoneContact.phone= :phone";
+		Query query =session.createQuery(sql);
+		query.setParameter("phone",phone);
+		List<Contact> results = query.list();
+		
+		return results;
+		
+	}
+    
     public List<PhoneContact> findPhone(String name) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -117,7 +130,31 @@ public class ContactDao {
 		
 	}
     
-    
+    @SuppressWarnings("unused")
+	private static void insertContact(String name, String photo, String birthday, String sex, String emails, String phones, String address, String note) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		EmailContact email = new EmailContact();
+		email.setEmail(emails);
+		PhoneContact phone = new PhoneContact();
+		phone.setPhone(phones);
+		
+		Contact contact = new Contact();
+		contact.setName(name);
+		contact.setPhoto(photo);
+		contact.setBirthday(birthday);
+		contact.setSex(sex);
+		contact.setAddress(address);
+		contact.setNote(note);
+		
+		Transaction tran = session.beginTransaction();
+		email.setContact(contact);
+		phone.setContact(contact);
+		session.save(contact);
+		session.save(phone);
+		session.save(email);
+		tran.commit();
+		session.close();
+	}
     private Contact extractContact(Contact results) {
 		Contact item = new Contact();
 		item.setName(results.getName());

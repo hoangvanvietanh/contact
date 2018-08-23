@@ -6,12 +6,24 @@ import java.util.List;
 import com.green.example.entity.Contact;
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
+import com.green.example.entity.PhoneHistory;
 
 public class HomeModel {
 private List<Contact> contacts = new ArrayList<>();
 private List<EmailContact> email = new ArrayList<>();
 private List<PhoneContact> phone = new ArrayList<>();
+private List<PhoneHistory> phoneHistory = new ArrayList<>();
+private PhoneContact phoneContact = new PhoneContact();
+
 	
+	public PhoneContact getPhoneContact() {
+	return phoneContact;
+}
+
+public void setPhoneContact(PhoneContact phoneContact) {
+	this.phoneContact = phoneContact;
+}
+
 	public List<Contact> getContacts() {
 		return contacts;
 	}
@@ -19,11 +31,13 @@ private List<PhoneContact> phone = new ArrayList<>();
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
-	
+
 	public boolean isEmpty() {
 		return contacts == null || contacts.size() == 0;
 	}
-	
+	public boolean isPhoneHistoryEmpty() {
+		return phoneHistory == null || phoneHistory.size() == 0;
+	}
 	public List<EmailContact> getEmail() {
 		return email;
 	}
@@ -47,4 +61,14 @@ private List<PhoneContact> phone = new ArrayList<>();
 	public boolean isPhoneEmpty() {
 		return phone == null || phone.size() == 0;
 	}
+
+	public List<PhoneHistory> getPhoneHistory() {
+		return phoneHistory;
+	}
+
+	public void setPhoneHistory(List<PhoneHistory> phoneHistory) {
+		this.phoneHistory = phoneHistory;
+	}
+	
+	
 }
