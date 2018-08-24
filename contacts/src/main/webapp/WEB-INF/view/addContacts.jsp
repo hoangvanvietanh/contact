@@ -48,7 +48,7 @@ td.c {
 	
 	<div id="main">
 	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/AddContactController") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
 	</div>		
 			<form enctype="multipart/form-data" action="contact?action=insert" method="post">

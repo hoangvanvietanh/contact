@@ -40,21 +40,19 @@
 	
 	<div id="main">
 	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/AddContactController") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
 	</div>
 		<div class="row" id="list-header">
-			<div class="cimage">Image</div>
-			<div class="cname">Name</div>
-			<div class="cbirthday">Birthday</div>
-			<div class="cgender">Gender</div>
-			<div class="caddress">Address</div>
-			<div class="cphone">Phone</div>
-			<div class="cemail">Email</div>
-			<div class="cnote">Notes</div>
-			<div class="action">Ac1</div>
-			<div class="action">Ac2</div>
-
+			<div class="rimage">Image</div>
+			<div class="rname">Name</div>
+			<div class="rbirthday">Birthday</div>
+			<div class="rgender">Gender</div>
+			<div class="raddress">Address</div>
+			<div class="rphone">Phone</div>
+			<div class="remail">Email</div>
+			<div class="rnote">Notes</div>
+			<div class="raction">Acion</div>
 		</div>
 		
 		<%
@@ -89,9 +87,15 @@
 				<div class="cnote"><%=contact.getNote()%></div>
 				<div>
 					<form action="<%=Utils.getUrl(request, "/ContactDetailController") %>" method="get">
-					<input type="hidden" name="contactName" value="<%=contact.getName() %>"/>
-					<button type="submit" >Edit</button>
-				</form>
+						<input type="hidden" name="contactName" value="<%=contact.getName() %>"/>
+						<button type="submit" >Edit</button>
+					</form>
+				</div>
+				<div>
+					<form action="<%=Utils.getUrl(request, "/contact") %>" method="get">
+						<input type="hidden" name="name" value="<%=contact.getName() %>"/>
+						<button type="submit" >Delete</button>
+					</form>
 				</div>
 			</div>
 			<%

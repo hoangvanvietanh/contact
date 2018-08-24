@@ -21,9 +21,14 @@
 	<%} else { %>
 	<div class="relative">
 		<div class="box" id="chronoExample">
-		<div class="vtName">
-				<div class="c"><%=model.getPhoneContact().getContact().getName() %></div>
+			<div class="vtName">
+				<%
+					if(model.getPhoneContact().getContact().getName().equals("No_Name")){
+				%>
+				<div class="c"><%=model.getPhoneContact().getPhone()%></div><%}else{ %>
+				<div class="c"><%=model.getPhoneContact().getContact().getName()%></div><%} %>
 			</div>
+			
 			<div class="timer" >
               <div class="values">00:00:00</div>
               <div>

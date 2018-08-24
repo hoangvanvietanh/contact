@@ -16,6 +16,8 @@ import com.green.example.entity.PhoneHistory;
 import com.green.example.model.HomeModel;
 import com.green.example.service.ContactService;
 
+import utils.Utils;
+
 /**
  * Servlet implementation class PhoneHistoryController
  */
@@ -54,8 +56,21 @@ public class PhoneHistoryController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action= request.getParameter("action");
+		String date = request.getParameter("date");
+		if(action.equals("deleteAll"))
+		{
+			contactService.deleteAllHistory();
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/phone.jsp");
+	        dispatcher.forward(request, response);
+		}
+		else if(action.equals("delete"))
+		{
+			contactService.deleteHistoryByDate(date);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/phone.jsp");
+	        dispatcher.forward(request, response);
+		}
+		
 	}
 
 }

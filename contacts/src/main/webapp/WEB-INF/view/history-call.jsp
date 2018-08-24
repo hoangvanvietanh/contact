@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/home.css">
+<link rel="stylesheet" type="text/css" href="resources/css/history.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>VietAnh</title>
 </head>
@@ -40,24 +40,46 @@
 	
 	<div id="main">
 	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
+		
+		<form action="PhoneHistoryController?action=deleteAll" method="post">
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/AddContactController") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
+		<button type="submit">Delete All History</button>
+		</form>
 	</div>
 		<div class="row" id="list-header">
 
-			<div class="cphone">Name</div>
-			<div class="cphone">Phone</div>
-			<div class="cbirthday">Date Time</div>
+			<div class="rname">Name</div>
+			<div class="rphone">Phone</div>
+			<div class="rday">Date Time</div>
+			
+			<div class="action"></div>	
+			
+			<div class="rname">Name</div>
+			<div class="rphone">Phone</div>
+			<div class="rday">Date Time</div>
+			
+			<div class="action"></div>
+			
+			<div class="rname">Name</div>
+			<div class="rphone">Phone</div>
+			<div class="rday">Date Time</div>
 		</div>
 		
 		<%
 				if (!model.isPhoneHistoryEmpty()) {
 				for(PhoneHistory history: model.getPhoneHistory()){
 		%>
-			<div class="row list">
-				<div class="cphone"> <%= history.getPhone().getContact().getName()%></div>
+			<div class="row2 list">
+				<div class="cname"> <%= history.getPhone().getContact().getName()%></div>
 				<div class="cphone"> <%= history.getPhone().getPhone() %></div>
-				<div class="cbirthday"><%=history.getDate() %></div>
+				<div class="cday"><%=history.getDate() %></div>
+				<div>
+					<form action="PhoneHistoryController?action=delete" method="post">
+						<input type="hidden" name="date" value="<%=history.getDate() %>"/>
+						<button type="submit" >del</button>
+					</form>
+				</div>
 			</div>
 			
 			<%

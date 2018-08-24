@@ -35,8 +35,12 @@ public class ContactController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/addContacts.jsp");
-        dispatcher.forward(request, response);
+		String name = request.getParameter("name");
+		System.out.println("Vo delete");
+		contactService.deleteContactByName(name);
+		System.out.println("Xoa ok");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/phone.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 	/**
@@ -45,20 +49,24 @@ public class ContactController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mode = request.getParameter("action");
 		String name = request.getParameter("name");
-		
+		String name1 = request.getParameter("name1");
+		String name2 = request.getParameter("name2");
 		Part file = request.getPart("file");
 		ContactDetailModel pm = new ContactDetailModel(file);
+	
 		String photo = pm.getFileName(file);
-		
+		String photos = request.getParameter("photo");
 		String uploadRootPath = request.getServletContext().getRealPath("resources/images/");
 		String birthday = request.getParameter("birthday");
 		String sex = request.getParameter("gender");
+		String sex1 = request.getParameter("gender1");
+		System.out.println("Gioi tinh 1: " + sex1+"|");
+		String sex2 = request.getParameter("gender2");
+		System.out.println("Gioi tinh 2: " + sex2+"|");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String note = request.getParameter("note");
-		
-		
 		
 		if(mode.equals("insert"))
 		{
@@ -67,6 +75,22 @@ public class ContactController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/phone.jsp");
 		    dispatcher.forward(request, response);
 		}
+		else if(mode.equals("update"))
+		{
+			contactService.deleteContactByName(name1);
+			pm.uploadFile(uploadRootPath);
+			if(photo.equals(""))
+			{
+				contactService.createContact(name2, photos, birthday, sex, email, phone, address, note);
+			}
+			else
+			{
+				contactService.createContact(name2, photo, birthday, sex, email, phone, address, note);
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/phone.jsp");
+		    dispatcher.forward(request, response);
+		}
+		
 		
 	}
 

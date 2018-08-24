@@ -52,23 +52,26 @@ td.c {
 	
 	<div id="main">
 	<div class="actionnn">
-		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/contact") %>'" >Add</button>
+		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/AddContactController") %>'" >Add</button>
 		<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController") %>'" >Call History</button>
 	</div>		
 			<% if (model.isErrContactNotFound()) { %>
 				<p class="error">Contact not found!</p>
 			<%} else { %>
-			<form enctype="multipart/form-data" action="ContactServlet?action=insert"
-			method="Post">
+			<form enctype="multipart/form-data" action="contact?action=update" method="Post">
 			<table class="tbl-border">
 				<tr>
 					<td>Name</td>
-					<td class="c" colspan="5"><%=model.getName() %></td>
+					<td class="c" colspan="5"><input type="hidden" name="name1" value="<%=model.getName()%>">
+											  <input type="text" name="name2" value="<%=model.getName()%>">
+					</td>
 				</tr>
 				<% } %>
 				<tr>
 					<td>Photo</td>
-					<td class="c" colspan="5"><input type="file" name="file"></td>
+					<td class="c" colspan="5"><input type="file" name="file">
+											<input type="hidden" name="photo" value="<%=model.getPhoto()%>">
+					</td>
 				</tr>
 				<tr>
 					<td>Birthday</td>
@@ -76,9 +79,10 @@ td.c {
 						placeholder="Input your birthday"></td>
 				</tr>
 				<tr>
-					<td>Sex</td>
-					<td class="c" colspan="5"><input type="radio" name="gender" value="male" >Male
+					<td>Sex </td>
+					<td class="c" colspan="5"><input type="radio" name="gender" value="male">Male
 								  <input type="radio" name="gender" value="female" >Female
+								  <input type="hidden" name = "gender " value="<%=model.getSex()%>" checked>
 					</td>
 				</tr>
 				<tr>

@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/call.css">
+<link rel="stylesheet" type="text/css" href="resources/css/callHome.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>VietAnh</title>
@@ -41,17 +41,17 @@
 
 	<div id="main">
 		<div class="actionnn">
-			<button type="button"
-				onclick="window.location.href='<%=Utils.getUrl(request, "/contact")%>'">Add</button>
-			<button type="button"
-				onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController")%>'">Call
-				History</button>
+			<form action="<%=Utils.getUrl(request, "/CallingController")%>" method="post">
+				<input type="text" name="phoneNumber">
+				<button type="submit">Call</button>
+				<button type="button" onclick="window.location.href='<%=Utils.getUrl(request, "/PhoneHistoryController")%>'">Call History</button>
+			</form>
 		</div>
 		<div class="row" id="list-header">
-			<div class="cimage">Image</div>
-			<div class="cname">Name</div>
-			<div class="cphone">Phone</div>
-			<div class="action">Ac1</div>
+			<div class="rimage">Image</div>
+			<div class="rname">Name</div>
+			<div class="rphone">Phone</div>
+			<div class="action">Action</div>
 
 		</div>
 
@@ -62,8 +62,7 @@
 		%>
 		<div class="row list">
 			<div class="cimage">
-				<img src="resources/images/<td><%=contact.getPhoto()%></td>"
-					height="30px" width="30px">
+				<img src="resources/images/<%=contact.getPhoto()%>" height="30px" width="30px">
 			</div>
 			<div class="cname"><%=contact.getName()%></div>
 			<div class="cphone">
@@ -97,11 +96,7 @@
 			}
 		%>
 		<div >
-			<form action="<%=Utils.getUrl(request, "/CallingController")%>"
-				method="post">
-				<input type="text" name="phoneNumber">
-				<button type="submit">Call</button>
-			</form>
+			
 		</div>
 	</div>
 

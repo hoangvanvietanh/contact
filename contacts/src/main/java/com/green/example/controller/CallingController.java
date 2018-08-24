@@ -62,8 +62,11 @@ public class CallingController extends HttpServlet {
 		ContactDetailModel model = new ContactDetailModel();
 		
 		String phoneNumber = req.getParameter("phoneNumber");
-		contactService.createNoNamePhone(phoneNumber);
-		
+		boolean checkPhone = contactService.checkPhoneNoName(phoneNumber);
+		if(checkPhone==false)
+		{
+			contactService.createNoNamePhone(phoneNumber);
+		}
 		if (phoneNumber != null) {
 			PhoneContact phoneContact = contactService.findPhoneByPhone(phoneNumber);
 			model.setPhoneContact(phoneContact);

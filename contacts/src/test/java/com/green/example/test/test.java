@@ -32,11 +32,57 @@ import java.time.format.DateTimeFormatter;
 public class test {
  
 	public static void main(String[] args) {
-
+		String name1="Messiiiasd";
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		 PhoneContact phoneContact = session.get(PhoneContact.class, "1234500s0");
-		 ;
-		 System.out.println(phoneContact.getContact().getName());
+		Query hql = session.createQuery("from PhoneHistory");
+		List<PhoneHistory> phoneHis = hql.list();
+		for(PhoneHistory p: phoneHis)
+		{
+			if(p.getPhone().getContact().getName().equals(name1))
+			{
+				session.delete(p);
+			}
+		}
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+		
+		
+		
+		
+	
+		/*int flag = 0;
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+		Query hql = session.createQuery("from PhoneContact");
+		List<PhoneContact> list = hql.list();
+		for(PhoneContact con: list)
+		{
+			if(con.getPhone().equals("11345"))
+			{
+				flag++;
+			}
+		}
+		if(flag!=0)
+		{
+			System.out.println("Yes");
+		}
+		else
+		{
+			System.out.println("No");
+		}*/
+		
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
+		 PhoneContact phoneContact = session.get(PhoneContact.class, "1234500");
+		 if(phoneContact.getContact().getName().equals("No_Name")==false)
+		 {
+			 System.out.println("ok");
+		 }
+		 else
+		 {
+			 System.out.println(phoneContact.getContact().getName());
+		 }*/
+		
 		
 		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		String pho ="123654";

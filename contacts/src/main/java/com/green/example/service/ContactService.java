@@ -1,12 +1,15 @@
 package com.green.example.service;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.green.example.dao.ContactDao;
 import com.green.example.dao.EmailContactDao;
@@ -30,7 +33,65 @@ public class ContactService {
 		phoneContactDao = new PhoneContactDao();
 		phoneHistoryDao = new PhoneHistoryDao();
 	}
-
+	public void deleteHistoryByDate(String date)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query hql = session.createQuery("from PhoneHistory");
+		List<PhoneHistory> phoneHis = hql.list();
+		for(PhoneHistory p: phoneHis)
+		{
+			if(p.getDate().equals(date))
+			{
+				session.delete(p);
+			}
+		}
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+	}
+	public void deleteHistoryByName(String name)
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query hql = session.createQuery("from PhoneHistory");
+		List<PhoneHistory> phoneHis = hql.list();
+		for(PhoneHistory p: phoneHis)
+		{
+			if(p.getPhone().getContact().getName().equals(name))
+			{
+				session.delete(p);
+			}
+		}
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+	}
+	public void deleteAllHistory()
+	{
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query hql = session.createQuery("from PhoneHistory");
+		List<PhoneHistory> phoneHis = hql.list();
+		for(PhoneHistory p: phoneHis)
+		{
+			session.delete(p);
+		
+		}
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+	}
+	public void deleteContactByName(String names)
+	{
+		deleteHistoryByName(names);
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Serializable name = new String(names);
+		java.lang.Object persistentInstance = session.load(Contact.class, name);
+		if (persistentInstance != null) {
+		    session.delete(persistentInstance);
+		}
+		Transaction tran = session.beginTransaction();
+		tran.commit();
+		session.close();
+	}
 	public void createContact(String name, String photo, String birthday, String sex, String emails, String phones, String address, String note) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		EmailContact email = new EmailContact();
@@ -54,6 +115,26 @@ public class ContactService {
 		session.save(email);
 		tran.commit();
 		session.close();
+	}
+	public boolean checkPhoneNoName(String phone)
+	{
+		int flag =0;
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+		Query hql = session.createQuery("from PhoneContact");
+		List<PhoneContact> list = hql.list();
+		for(PhoneContact con: list)
+		{
+			if(con.getPhone().equals(phone))
+			{
+				flag++;
+			}
+		}
+		if(flag!=0)
+		{
+			return true;
+		}
+		return false;
 	}
 	public void createPhoneHistory(String phones) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

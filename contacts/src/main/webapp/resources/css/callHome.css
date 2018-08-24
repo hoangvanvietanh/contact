@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
 #contrainer {
-	width: 230px;
+	width: 350px;
 	height: 600px;
 	float: left;
 }
 
 #main {
-	width: 1060px;
+	width: 500px;
 	height: 2000px;
-	float: right;
+	float: left;
 }
 
 .box {
@@ -57,19 +57,19 @@
 }
 
 #list-header {
-    height: 23px;
-    background-color: darkseagreen;
-    color: white;
-    top: 10px;
+	height: 23px;
+	background-color: darkseagreen;
+	color: white;
+	top: 10px;
 }
 
 .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: 0px;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: 103px;
+	margin-left: 0px;
 }
 
 .list {
@@ -87,6 +87,17 @@
 }
 
 .cname {
+	width: 145px;
+	height: 25px;
+	text-align: left;
+}
+.rimage {
+	width: 50px;
+	height: 25px;
+	text-align: left;
+}
+
+.rname {
 	width: 145px;
 	height: 25px;
 	text-align: left;
@@ -115,7 +126,11 @@
 	height: 25px;
 	text-align: left;
 }
-
+.rphone {
+	width: 100px;
+	height: 25px;
+	text-align: left;
+}
 .cemail {
 	width: 209px;
 	height: 25px;
@@ -133,11 +148,12 @@
 	height: 25px;
 	text-align: left;
 }
+
 .rimage {
-    width: 66px;
-    height: 25px;
-    text-align: center;
-}	
+	width: 66px;
+	height: 25px;
+	text-align: center;
+}
 
 .rname {
 	width: 145px;
@@ -186,15 +202,16 @@
 	height: 25px;
 	text-align: left;
 }
+
 .actionnn {
-    padding: 5px 0px;
-    margin-left: 0px;
+	padding: 5px 0px;
+	margin-left: 0px;
 }
 
 table.tbl-border {
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 50%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 50%;
 }
 
 table.tbl-border th, td {
@@ -207,6 +224,7 @@ table.tbl-border th, td {
 	text-align: left;
 	padding: 5px;
 }
+
 input:focus {
-    outline:none;
+	outline: none;
 }
