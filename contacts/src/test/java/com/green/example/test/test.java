@@ -38,10 +38,7 @@ public class test {
 		List<PhoneHistory> phoneHis = hql.list();
 		for(PhoneHistory p: phoneHis)
 		{
-			if(p.getPhone().getContact().getName().equals(name1))
-			{
-				session.delete(p);
-			}
+			System.out.println("Hi");
 		}
 		Transaction tran = session.beginTransaction();
 		tran.commit();
