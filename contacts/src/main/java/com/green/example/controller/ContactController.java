@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.green.example.entity.Contact;
+import com.green.example.dao.SpringUtil;
 import com.green.example.model.ContactDetailModel;
 import com.green.example.service.ContactService;
 
@@ -22,12 +22,13 @@ import com.green.example.service.ContactService;
 		  urlPatterns = "/contact")
 public class ContactController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ContactService contactService;
+	
+	//private ContactService contactService;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ContactController() {
-    	contactService = new ContactService();
+    	//contactService = new ContactService();
         // TODO Auto-generated constructor stub
     }
 
@@ -35,6 +36,8 @@ public class ContactController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SpringUtil factory = new SpringUtil();
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
 		String name = request.getParameter("name");
 		System.out.println("Vo delete");
 		contactService.deleteContactByName(name);
@@ -47,6 +50,8 @@ public class ContactController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SpringUtil factory = new SpringUtil();
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
 		String mode = request.getParameter("action");
 		String name = request.getParameter("name");
 		String name1 = request.getParameter("name1");

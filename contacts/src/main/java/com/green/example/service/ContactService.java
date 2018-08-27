@@ -1,7 +1,6 @@
 package com.green.example.service;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,12 +26,13 @@ public class ContactService {
 	private PhoneContactDao phoneContactDao;
 	private PhoneHistoryDao phoneHistoryDao;
 	
-	public ContactService() {
-		contactDao = new ContactDao();
-		emailContactDao = new EmailContactDao();
-		phoneContactDao = new PhoneContactDao();
-		phoneHistoryDao = new PhoneHistoryDao();
+	public ContactService(ContactDao contactDao,EmailContactDao emailContactDao,PhoneContactDao phoneContactDao,PhoneHistoryDao phoneHistoryDao) {
+		this.contactDao = contactDao ;
+		this.emailContactDao = emailContactDao ;
+		this.phoneContactDao = phoneContactDao;
+		this.phoneHistoryDao = phoneHistoryDao;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void deleteHistoryByDate(String date)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -49,6 +49,7 @@ public class ContactService {
 		tran.commit();
 		session.close();
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void deleteHistoryByName(String name)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -65,6 +66,7 @@ public class ContactService {
 		tran.commit();
 		session.close();
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void deleteAllHistory()
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -116,6 +118,7 @@ public class ContactService {
 		tran.commit();
 		session.close();
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public boolean checkPhoneNoName(String phone)
 	{
 		int flag =0;

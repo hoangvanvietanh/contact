@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+
+   <bean id="contactDao" class="com.green.example.dao.ContactDao" />
+   <bean id="emailContactDao" class="com.green.example.dao.EmailContactDao" />
+   <bean id="phoneContactDao" class="com.green.example.dao.PhoneContactDao" />
+   <bean id="phoneHistoryDao" class="com.green.example.dao.PhoneHistoryDao" />
+   <bean id="contactService" class="com.green.example.service.ContactService">
+   		<constructor-arg ref="contactDao"/>
+   		<constructor-arg ref="emailContactDao"/>
+   		<constructor-arg ref="phoneContactDao"/>
+   		<constructor-arg ref="phoneHistoryDao"/>
+   </bean>
+   
+   
+   <bean id="contact" class="com.green.example.entity.Contact" />
+   <bean id="email" class="com.green.example.entity.EmailContact" />
+   <bean id="phone" class="com.green.example.entity.PhoneContact" />
+   <bean id="phoneHistory" class="com.green.example.entity.PhoneHistory" />
+   <bean id="phoneContact" class="com.green.example.entity.PhoneContact" />
+   <bean id="homeModel" class="com.green.example.model.HomeModel">
+   		<constructor-arg ref="contact"/>
+   		<constructor-arg ref="email"/>
+   		<constructor-arg ref="phone"/>
+   		<constructor-arg ref="phoneHistory"/>
+   		<constructor-arg ref="phoneContact"/>
+   </bean>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+</beans>

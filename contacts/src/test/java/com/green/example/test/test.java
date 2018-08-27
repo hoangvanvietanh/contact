@@ -1,38 +1,29 @@
 package com.green.example.test;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.green.example.entity.Contact;
 
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
-import com.green.example.entity.PhoneHistory;
 import com.green.example.dao.HibernateUtil;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 
 public class test {
  
 	public static void main(String[] args) {
-		String name1="Messiiiasd";
+		/*String name1="Messiiiasd";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query hql = session.createQuery("from PhoneHistory");
 		List<PhoneHistory> phoneHis = hql.list();
@@ -42,7 +33,7 @@ public class test {
 		}
 		Transaction tran = session.beginTransaction();
 		tran.commit();
-		session.close();
+		session.close();*/
 		
 		
 		

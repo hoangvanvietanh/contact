@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,8 +93,10 @@ public class ContactDao {
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "select c from contact where  contact.phoneContact.phone= :phone";
+		@SuppressWarnings("rawtypes")
 		Query query =session.createQuery(sql);
 		query.setParameter("phone",phone);
+		@SuppressWarnings("unchecked")
 		List<Contact> results = query.list();
 		
 		return results;
@@ -108,15 +108,18 @@ public class ContactDao {
 
 		String sql = "select c from PhoneContact c where c.contact.name = :name";
 
+		@SuppressWarnings("rawtypes")
 		Query query =session.createQuery(sql);
 		
 		query.setParameter("name",name);
+		@SuppressWarnings("unchecked")
 		List<PhoneContact> phone = query.list();
 	
 		return phone;
 		
 	}
-    public List<EmailContact> findEmail(String name) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<EmailContact> findEmail(String name) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
 
 		String sql = "select c from EmailContact c where c.contact.name = :name";
@@ -155,7 +158,8 @@ public class ContactDao {
 		tran.commit();
 		session.close();
 	}
-    private Contact extractContact(Contact results) {
+    @SuppressWarnings("unused")
+	private Contact extractContact(Contact results) {
 		Contact item = new Contact();
 		item.setName(results.getName());
 		item.setAddress(results.getAddress());

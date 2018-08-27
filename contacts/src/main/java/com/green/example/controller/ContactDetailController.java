@@ -1,7 +1,6 @@
 package com.green.example.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.green.example.dao.SpringUtil;
 import com.green.example.entity.Contact;
 import com.green.example.entity.EmailContact;
 import com.green.example.entity.PhoneContact;
@@ -24,10 +24,10 @@ import com.green.example.service.ContactService;
 public class ContactDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ContactService contactService;
+	//private ContactService contactService;
 
 	public ContactDetailController() {
-		contactService = new ContactService();
+		//contactService = new ContactService();
 	}
 
 	/**
@@ -37,6 +37,8 @@ public class ContactDetailController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		SpringUtil factory = new SpringUtil();
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
 		ContactDetailModel model = new ContactDetailModel();
 		String name = req.getParameter("contactName");
 		// update mode

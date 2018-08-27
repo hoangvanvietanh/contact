@@ -1,7 +1,6 @@
 package com.green.example.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.green.example.entity.Contact;
-import com.green.example.entity.EmailContact;
+import com.green.example.dao.SpringUtil;
 import com.green.example.entity.PhoneContact;
 import com.green.example.model.ContactDetailModel;
 import com.green.example.service.ContactService;
@@ -24,14 +22,14 @@ import com.green.example.service.ContactService;
 		  urlPatterns = "/calling")
 public class CallingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-	private ContactService contactService;
+	//private ContactService contactService;
 
     public CallingController() {
-    	contactService = new ContactService();
+    	//contactService = new ContactService();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,6 +37,8 @@ public class CallingController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		SpringUtil factory = new SpringUtil();
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");  
 		ContactDetailModel model = new ContactDetailModel();
 		String phone = req.getParameter("phoneContact");
 					if (phone != null) {
@@ -59,6 +59,9 @@ public class CallingController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		SpringUtil factory = new SpringUtil();
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");  
+		
 		ContactDetailModel model = new ContactDetailModel();
 		
 		String phoneNumber = req.getParameter("phoneNumber");

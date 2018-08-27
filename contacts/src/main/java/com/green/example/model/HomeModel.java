@@ -16,6 +16,17 @@ private List<PhoneHistory> phoneHistory = new ArrayList<>();
 private PhoneContact phoneContact = new PhoneContact();
 
 	
+
+
+	public HomeModel(List<Contact> contacts, List<EmailContact> email, List<PhoneContact> phone,
+		List<PhoneHistory> phoneHistory, PhoneContact phoneContact) {
+	this.contacts = contacts;
+	this.email = email;
+	this.phone = phone;
+	this.phoneHistory = phoneHistory;
+	this.phoneContact = phoneContact;
+}
+
 	public PhoneContact getPhoneContact() {
 	return phoneContact;
 }
