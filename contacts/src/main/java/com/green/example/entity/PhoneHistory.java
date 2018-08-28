@@ -8,14 +8,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="phone_history")
+@Table(name = "phone_history")
 public class PhoneHistory {
 	@Id
-	@Column(name="date")
+	@Column(name = "date")
 	private String date;
-	
+
 	@ManyToOne
-	@JoinColumn(name="phone_his")
+	@JoinColumn(name = "phone_his")
 	private PhoneContact phone;
 
 	public String getDate() {
@@ -33,6 +33,5 @@ public class PhoneHistory {
 	public void setPhone(PhoneContact phone) {
 		this.phone = phone;
 	}
-	
-	
+
 }

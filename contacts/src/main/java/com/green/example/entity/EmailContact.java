@@ -1,6 +1,5 @@
 package com.green.example.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,11 +13,11 @@ public class EmailContact {
 	@Id
 	@Column(name = "email")
 	private String email;
-	
+
 	@ManyToOne
-	@JoinColumn(name="email_contact_name")
+	@JoinColumn(name = "email_contact_name")
 	private Contact contact;
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -34,5 +33,5 @@ public class EmailContact {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-	
+
 }

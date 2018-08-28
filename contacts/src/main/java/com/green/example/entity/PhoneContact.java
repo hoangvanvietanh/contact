@@ -8,16 +8,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="phone_contacts")
+@Table(name = "phone_contacts")
 public class PhoneContact {
 	@Id
 	@Column(name = "phone")
 	private String phone;
-	
+
 	@ManyToOne
-	@JoinColumn(name="phone_contact_name")
+	@JoinColumn(name = "phone_contact_name")
 	private Contact contact;
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -34,8 +34,4 @@ public class PhoneContact {
 		this.contact = contact;
 	}
 
-	
-	
-	
-	
 }

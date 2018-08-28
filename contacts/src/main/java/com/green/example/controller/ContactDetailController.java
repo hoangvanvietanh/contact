@@ -24,39 +24,39 @@ import com.green.example.service.ContactService;
 public class ContactDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//private ContactService contactService;
+	// private ContactService contactService;
 
 	public ContactDetailController() {
-		//contactService = new ContactService();
+		// contactService = new ContactService();
 	}
 
 	/**
-	 * @throws IOException 
-	 * @throws ServletException 
+	 * @throws IOException
+	 * @throws ServletException
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		SpringUtil factory = new SpringUtil();
 		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
 		ContactDetailModel model = new ContactDetailModel();
 		String name = req.getParameter("contactName");
 		// update mode
 		if (name != null) {
-		
-					Contact contact = contactService.findContact(name);
-					List<EmailContact> email = contactService.findEmail(name);
-					List<PhoneContact> phone = contactService.findPhone(name);
-					model.setEmail(email);
-					model.setPhone(phone);
-					if (contact != null) {
-						model.setContact(contact);
-					} else {
 
-						// Error contact not found
-						model.setErrContactNotFound(true);
-						model.setName(name);
-					}
+			Contact contact = contactService.findContact(name);
+			List<EmailContact> email = contactService.findEmail(name);
+			List<PhoneContact> phone = contactService.findPhone(name);
+			model.setEmail(email);
+			model.setPhone(phone);
+			if (contact != null) {
+				model.setContact(contact);
+			} else {
+
+				// Error contact not found
+				model.setErrContactNotFound(true);
+				model.setName(name);
+			}
 			// create mode
 		} else {
 			model.setContact(new Contact());

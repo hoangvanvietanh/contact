@@ -17,65 +17,65 @@ import com.green.example.service.ContactService;
 /**
  * Servlet implementation class CallingController
  */
-@WebServlet(
-		  name = "CallingController", 
-		  urlPatterns = "/calling")
+@WebServlet(name = "CallingController", urlPatterns = "/calling")
 public class CallingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	//private ContactService contactService;
-
-    public CallingController() {
-    	//contactService = new ContactService();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	// private ContactService contactService;
+
+	public CallingController() {
+		// contactService = new ContactService();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		SpringUtil factory = new SpringUtil();
-		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");  
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
 		ContactDetailModel model = new ContactDetailModel();
 		String phone = req.getParameter("phoneContact");
-					if (phone != null) {
-					PhoneContact phoneContact = contactService.findPhoneByPhone(phone);
-					model.setPhoneContact(phoneContact);;
-				
-					} else {
+		if (phone != null) {
+			PhoneContact phoneContact = contactService.findPhoneByPhone(phone);
+			model.setPhoneContact(phoneContact);
+			;
 
-						// Error contact not found
-						model.setErrContactNotFound(true);
-					}
+		} else {
+
+			// Error contact not found
+			model.setErrContactNotFound(true);
+		}
 		req.setAttribute("model", model);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/calling.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		SpringUtil factory = new SpringUtil();
-		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");  
-		
+		ContactService contactService = (ContactService) factory.getBeanFactory().getBean("contactService");
+
 		ContactDetailModel model = new ContactDetailModel();
-		
+
 		String phoneNumber = req.getParameter("phoneNumber");
 		boolean checkPhone = contactService.checkPhoneNoName(phoneNumber);
-		if(checkPhone==false)
-		{
+		if (checkPhone == false) {
 			contactService.createNoNamePhone(phoneNumber);
 		}
 		if (phoneNumber != null) {
 			PhoneContact phoneContact = contactService.findPhoneByPhone(phoneNumber);
 			model.setPhoneContact(phoneContact);
-			} else {
-				model.setErrContactNotFound(true);
-			}
+		} else {
+			model.setErrContactNotFound(true);
+		}
 		req.setAttribute("model", model);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/calling.jsp");
 		dispatcher.forward(req, resp);
